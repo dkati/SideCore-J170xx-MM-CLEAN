@@ -5,7 +5,7 @@
 VERSION_NUMBER=$(<build/version)
 
 TOOLCHAIN_DIR=toolchain/bin/aarch64-linux-android-
-TC=stock 
+TC=uber 
 #stock/linaro/uber
 THISDIR=`readlink -f .`;
 
