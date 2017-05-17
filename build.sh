@@ -56,6 +56,7 @@ OPTION_1()
 	rm -rf build/proprietary/carliv/output/*
 	rm -rf build/proprietary/carliv/boot-dummy/*
 	rm -rf build/proprietary/carliv/boot/boot.img-kernel
+	rm -rf PRODUCT/*.zip
 	make clean
 	make ARCH=arm64 distclean
 	ccache -c 
