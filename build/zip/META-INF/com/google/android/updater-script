@@ -53,7 +53,7 @@ then
 	package_extract_dir("system/lib", "/system/lib");
 	package_extract_dir("system/etc/init.d", "/system/etc/init.d");
 	set_metadata_recursive(0, 0, 0755, 0644, "/system/app");
-	et_metadata_recursive(0, 0, 0755, 0644, "/system/lib");
+	set_metadata_recursive(0, 0, 0755, 0644, "/system/lib");
 	set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/init.d");
 
 	set_metadata_recursive("/system/app/mcRegistry", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
@@ -111,7 +111,7 @@ then
 	ui_print("Stock sound will be boosted by 20%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
 	package_extract_file("audio/stock/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
-endif
+endif;
 
 #stock 10%
 if
@@ -120,7 +120,7 @@ then
 	ui_print("Stock sound will be boosted by 10%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
 	package_extract_file("audio/stock/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
-endif
+endif;
 
 #evo 20%
 if
@@ -129,7 +129,7 @@ then
 	ui_print("Evo sound will be boosted by 20%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
 	package_extract_file("audio/evo/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
-endif
+endif;
 
 #evo 10%
 if
@@ -138,7 +138,7 @@ then
 	ui_print("Evo sound will be boosted by 10%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
 	package_extract_file("audio/evo/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
-endif
+endif;
 
 ################## END OF SOUND #####################
 
