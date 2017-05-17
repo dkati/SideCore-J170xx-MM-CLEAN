@@ -41,6 +41,7 @@ OPTION_2()
 	FILENAME=SideCore-[EVO]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-STOCK-MM"`.zip
 	zip -r $FILENAME .;
 	cd ../..
+	cp -r build/zip/*.zip PRODUCT/$FILENAME
 	
 	
 }
