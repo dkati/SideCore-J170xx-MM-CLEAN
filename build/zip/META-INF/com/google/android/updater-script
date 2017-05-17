@@ -1,5 +1,5 @@
 ui_print(" ");
-ui_print("SideCore Kernel 1.0");
+ui_print("SideCore Kernel 2.0");
 ui_print(" ");
 ui_print("...flashing");
 ifelse(is_mounted("/system"), unmount("/system"));
@@ -62,7 +62,7 @@ then
 
 	package_extract_file("boot.img", "/tmp/boot.img");
 	ui_print("Flashing kernel image");
-	set_progress(0.99);
+	
 	set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
 	run_program("/tmp/flash_kernel.sh");
 
@@ -78,7 +78,6 @@ then
 	package_extract_file("/stock/stock/zip","/tmp/stock");
 	run_program("/sbin/busybox", "unzip", "/tmp/stock/stock.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/stock/stock.zip");
 	run_program("/sbin/busybox", "sh", "/tmp/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/stock/stock.zip");
-
 
 	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/stock/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/stock");
 	run_program("/sbin/busybox", "sh", "/tmp/splashboot/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/stock/bootlogo.zip");
@@ -124,7 +123,7 @@ endif;
 
 #evo 20%
 if
-file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
+file_getprop("/tmp/aroma-data/sound.prop","selected.2") == "1" 
 then
 	ui_print("Evo sound will be boosted by 20%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
@@ -133,7 +132,7 @@ endif;
 
 #evo 10%
 if
-file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
+file_getprop("/tmp/aroma-data/sound.prop","selected.2") == "1" 
 then
 	ui_print("Evo sound will be boosted by 10%");
 	delete_recursive("/system/etc/mixer_paths_rev03.xml");
