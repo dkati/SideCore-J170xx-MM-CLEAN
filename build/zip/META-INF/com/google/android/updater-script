@@ -17,11 +17,22 @@ set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
 run_program("/tmp/flash_kernel.sh");
 ui_print("Fixing Things");
 
-#White splash
+#EVO SELECTED.TODO;ADD THE SPECIFIC KERNEL
 package_extract_dir("splashboot", "/tmp/splashboot");
-run_program("/sbin/busybox", "unzip", "/tmp/splashboot/splashboot.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot");
-run_program("/sbin/busybox", "sh", "/tmp/splashboot/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/splashboot.zip");
+if
+file_getprop("/tmp/aroma-data/tweaks.prop","selected.1") == "1" 
+then
+	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/evo/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/evo");
+	run_program("/sbin/busybox", "sh", "/tmp/splashboot/evo/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/evo/bootlogo.zip");
+endif;
 
+#STOCK SELECTED.TODO;ADD THE SPECIFIC KERNEL
+if
+file_getprop("/tmp/aroma-data/tweaks.prop","selected.1") == "2" 
+then
+	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/stock/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/stock");
+	run_program("/sbin/busybox", "sh", "/tmp/splashboot/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/stock/bootlogo.zip");
+endif;
 
 delete_recursive("/system/app/mcRegistry");
 delete_recursive("/system/app/00060308060501020000000000000000.tlbin");
@@ -67,7 +78,7 @@ set_metadata("/system/lib/libsecure_storage.so", "uid", 0, "gid", 0, "mode", 064
 
 #If overlay fix is selected
 if
-file_getprop("/tmp/aroma-data/tweaks.prop","selected.1") == "1" 
+file_getprop("/tmp/aroma-data/tweaks.prop","selected.2") == "1" 
 then
 	ui_print("Deleting old overlay configuration...");
 	delete_recursive("/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");

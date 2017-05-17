@@ -137,9 +137,16 @@ selectbox(
   #-----------------------------[ Selectbox Without Group ]-------------------------#
   # TITLE         			   |  SUBTITLE                          | Initial Value #
   #----------------------------+------------------------------------+---------------#
-  "Screen Overlay",                                ""                                                      ,2,   #-- Group 1. key = "selected.1"
-  "Remove Screen Overlay",                               "Removes Screen Overlay feature"          ,1,   #-- selected.1 = 1
-  "Dont touch it",                                 "Do nothing.Stay stock"                ,0   #-- selected.1 = 2
+  
+   "ROM Kernel","only splash for now",2, #-- Group 1.key = "selected.1"
+  "Evo Kernel","only splash for now",1,  #-- selected.1 = 1
+  "Stock Kernel","only splash for now",0,  #-- selected.1 =2
+  
+  "Screen Overlay", ""  ,2,   #-- Group 2. key = "selected.2"
+  "Remove Screen Overlay",  "ONLY FOR STOCK.EVO=BRICK"  ,1,   #-- selected.2 = 1
+  "Dont touch it",  "Do nothing.Stay stock" ,0   #-- selected.2 = 2
+  
+ 
 
 );
 
