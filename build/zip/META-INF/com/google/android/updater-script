@@ -89,6 +89,46 @@ then
 endif;
 
 
+#########################################################
+# Audio implementation
+
+#stock 20%
+if
+file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
+then
+	ui_print("Stock sound will be boosted by 20%");
+	delete_recursive("/system/etc/mixer_paths_rev03.xml");
+	package_extract_file("audio/stock/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
+endif
+
+#stock 10%
+if
+file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "2" 
+then
+	ui_print("Stock sound will be boosted by 10%");
+	delete_recursive("/system/etc/mixer_paths_rev03.xml");
+	package_extract_file("audio/stock/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
+endif
+
+#evo 20%
+if
+file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
+then
+	ui_print("Evo sound will be boosted by 20%");
+	delete_recursive("/system/etc/mixer_paths_rev03.xml");
+	package_extract_file("audio/evo/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
+endif
+
+#evo 10%
+if
+file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
+then
+	ui_print("Evo sound will be boosted by 10%");
+	delete_recursive("/system/etc/mixer_paths_rev03.xml");
+	package_extract_file("audio/evo/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
+endif
+
+################## END OF SOUND #####################
 
 
 ui_print("Installing busybox...");

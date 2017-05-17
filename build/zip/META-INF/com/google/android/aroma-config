@@ -145,11 +145,36 @@ selectbox(
   "Screen Overlay", ""  ,2,   #-- Group 2. key = "selected.2"
   "Remove Screen Overlay",  "ONLY FOR STOCK.EVO=BRICK"  ,1,   #-- selected.2 = 1
   "Dont touch it",  "Do nothing.Stay stock" ,0   #-- selected.2 = 2
-  
- 
 
 );
 
+selectbox(
+  #-- Title
+    "Audio corner",
+
+  #-- Sub Title
+    "Please choose one of the options:",
+
+  #-- Icon: <AROMA Resource Dir>/icons/personalize.png or <ThemeDir>/icon.personalize.png
+    "@install",
+
+  #-- Will be saved in /tmp/aroma/kernel.prop
+    "sound.prop",
+
+  #-----------------------------[ Selectbox Without Group ]-------------------------#
+  # TITLE         			   |  SUBTITLE                          | Initial Value #
+  #----------------------------+------------------------------------+---------------#
+  
+   "Stock kernel speaker audio","",2, #-- Group 1.key = "selected.1"
+   "Increase volume by 20%","",1,  #-- selected.1 = 1
+   "Increase volume by 10%","",0,  #-- selected.1 =2
+   "Do not touch it","",0,                 #-- selected.1 =3
+  
+   "Evo kernel speaker audio", ""  ,2,   #-- Group 2. key = "selected.2"
+   "Increase volume by 20%","",1,     #-- selected.2 = 1
+   "Increase volume by 10%","",0,  #-- selected.2 = 2
+   "Do not touch it","",0                    #--selected.2=3
+);
 
 
 ###################################################################################################################
