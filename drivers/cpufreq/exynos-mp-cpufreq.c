@@ -641,8 +641,12 @@ static int exynos_cpufreq_init(struct cpufreq_policy *policy)
 
 	pr_debug("%s: cpu[%d]\n", __func__, policy->cpu);
 
-	policy->cur = policy->min = policy->max = exynos_getspeed(policy->cpu);
-
+	policy->cur  = policy->max = exynos_getspeed(policy->cpu);
+	#Thats the stock value
+	//policy->min = 546000; 
+	
+	policy->min  = 450000;
+	
 	cpufreq_table_validate_and_show(policy, exynos_info[cur]->freq_table);
 
 	/* set the transition latency value */
