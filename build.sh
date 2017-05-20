@@ -11,8 +11,17 @@ THISDIR=`readlink -f .`;
 
 KERNELNAME=SideCore
 
-OPTION_2()
+repack()
 {
+	cd build/zip
+	FILENAME=SideCore-[UNIFIED]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
+	zip -r $FILENAME .;
+	cd ../..
+	cp -r build/zip/*.zip PRODUCT/$FILENAME
+}
+evo()
+{
+	clean;
 	echo "Copying toolchain..."
 	if [ ! -d "toolchain" ]; then
 		mkdir toolchain
@@ -31,22 +40,58 @@ OPTION_2()
 		exit 0;
 	fi
 	
+	#Get evo Ramdisk
+	rm -rf build/proprietary/carliv/boot/*
+	cp -r ramdisks/evo/* build/proprietary/carliv/boot
+	
 	cp -r arch/arm64/boot/Image build/proprietary/carliv/boot/boot.img-kernel
 	
 	cd build/proprietary/carliv
 	./carliv_executable.sh
 	cd ../../..
 	cp -r build/proprietary/carliv/output/boot.img build/zip/boot.img
-	cd build/zip
-	FILENAME=SideCore-[UNIFIED]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
-	zip -r $FILENAME .;
-	cd ../..
-	cp -r build/zip/*.zip PRODUCT/$FILENAME
+	
 	
 	
 }
 
-OPTION_1()
+stock()
+{
+	echo "Building stock kernel..."
+	echo "Copying toolchain..."
+	if [ ! -d "toolchain" ]; then
+		mkdir toolchain
+	fi
+	cp -r ../toolchains/$TC/aarch64-linux-android-4.9/* toolchain
+	
+	#Build pure zImage
+	export CROSS_COMPILE=$TOOLCHAIN_DIR
+	export ARCH=arm64
+	make j7_2016_defconfig
+	make -j4
+	
+	PRODUCTIMAGE="arch/arm64/boot/Image"
+	if [ ! -f "$PRODUCTIMAGE" ]; then
+		echo "build failed" 
+		exit 0;
+	fi
+	
+	#Get stock Ramdisk
+	rm -rf build/proprietary/carliv/boot/*
+	cp -r ramdisks/stock/* build/proprietary/carliv/boot
+	
+	cp -r arch/arm64/boot/Image build/proprietary/carliv/boot/boot.img-kernel
+	
+	cd build/proprietary/carliv
+	./carliv_executable.sh
+	cd ../../..
+	
+	#Copy stock image to our flashables
+	cp -r build/proprietary/carliv/output/boot.img build/zip/stock/boot.img
+	
+	
+}
+clean()
 {
 
 	echo "Cleaning custom kernel files..."
@@ -56,6 +101,7 @@ OPTION_1()
 	rm -rf build/proprietary/carliv/output/*
 	rm -rf build/proprietary/carliv/boot-dummy/*
 	rm -rf build/proprietary/carliv/boot/boot.img-kernel
+	rm -rf build/proprietary/carliv/boot/*
 	rm -rf PRODUCT/*.zip
 	make clean
 	make ARCH=arm64 distclean
@@ -76,17 +122,26 @@ rerun()
 echo ""
 echo "SideCore kernel for J710xx"
 echo "1) Clean Workspace"
-echo "2) Build kernel"
-echo "3) Exit"
+echo "2) Build stock kernel"
+echo "3) Build evo"
+echo "4) Repack kernels"
+echo "5) Exit"
 echo ""
 read -p "Please select an option " prompt
 echo ""
 if [ $prompt == "1" ]; then
-	OPTION_1; 
+	clean; 
 	rerun;
 elif [ $prompt == "2" ]; then
-	OPTION_2; 
+	stock;
+	rerun;
 elif [ $prompt == "3" ]; then
+	evo; 
+	rerun;
+elif [ $prompt == "4" ]; then
+	OPTION_4;
+	rerun;
+elif [ $prompt == "5" ]; then
 	exit
 fi
 
