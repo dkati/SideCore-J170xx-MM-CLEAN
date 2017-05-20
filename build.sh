@@ -21,7 +21,7 @@ repack()
 }
 evo()
 {
-	clean;
+	distro_clean;
 	echo "Copying toolchain..."
 	if [ ! -d "toolchain" ]; then
 		mkdir toolchain
@@ -91,9 +91,9 @@ stock()
 	
 	
 }
-clean()
-{
 
+distro_clean()
+{
 	echo "Cleaning custom kernel files..."
 	rm -rf build/proprietary/kernel_stats/boot.img-kernel
 	rm -rf build/zip/boot.img
@@ -102,16 +102,31 @@ clean()
 	rm -rf build/proprietary/carliv/boot-dummy/*
 	rm -rf build/proprietary/carliv/boot/boot.img-kernel
 	rm -rf build/proprietary/carliv/boot/*
-	rm -rf PRODUCT/*.zip
 	make clean
 	make ARCH=arm64 distclean
-	ccache -c 
-	ccache -C
 	rm -rf toolchain/*
 	if [ ! -d "toolchain" ]; then
-	mkdir toolchain
+		mkdir toolchain
 	fi
 	
+	cp -r ../toolchains/$TC/aarch64-linux-android-4.9/* toolchain
+	
+}
+deep_clean()
+{
+
+	echo "Cleaning custom kernel files..."
+	distro_clean;
+	
+	rm -rf build/zip/stock/*
+	rm -rf PRODUCT/*.zip
+	ccache -c 
+	ccache -C
+	
+	rm -rf toolchain/*
+	if [ ! -d "toolchain" ]; then
+		mkdir toolchain
+	fi
 	cp -r ../toolchains/$TC/aarch64-linux-android-4.9/* toolchain
 	
 }
@@ -130,7 +145,7 @@ echo ""
 read -p "Please select an option " prompt
 echo ""
 if [ $prompt == "1" ]; then
-	clean; 
+	deep_clean; 
 	rerun;
 elif [ $prompt == "2" ]; then
 	stock;
