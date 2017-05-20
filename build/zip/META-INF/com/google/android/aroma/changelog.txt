@@ -8,3 +8,4 @@
 <*>GPU and CPU voltage control</*>
 <*>Audio boost via aroma configuration</*>
 <*>Unified zip.2 kernels-1 zip.stock and evo</*>
+<*>Default TCP congestion is CUBIC</*>
