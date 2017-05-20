@@ -642,7 +642,7 @@ static int exynos_cpufreq_init(struct cpufreq_policy *policy)
 	pr_debug("%s: cpu[%d]\n", __func__, policy->cpu);
 
 	policy->cur  = policy->max = exynos_getspeed(policy->cpu);
-	#Thats the stock value
+	//Thats the stock value
 	//policy->min = 546000; 
 	
 	policy->min  = 450000;
