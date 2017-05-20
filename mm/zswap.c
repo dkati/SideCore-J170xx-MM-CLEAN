@@ -95,9 +95,12 @@ static bool zswap_enabled __read_mostly = 1;
 module_param_named(enabled, zswap_enabled, bool, 0444);
 
 /* Compressor to be used by zswap (fixed at boot for now) */
+#ifdef CONFIG_CRYPTO_LZ4
+#define ZSWAP_COMPRESSOR_DEFAULT "lz4"
+#else
 #define ZSWAP_COMPRESSOR_DEFAULT "lzo"
-#define ZSWAP_COMPRESSOR "lz4"
-static char *zswap_compressor = ZSWAP_COMPRESSOR;
+#endif
+static char *zswap_compressor = ZSWAP_COMPRESSOR_DEFAULT;
 module_param_named(compressor, zswap_compressor, charp, 0444);
 
 /* The maximum rate (1/1000) of memory that the compressed pool can occupy */
@@ -105,11 +108,11 @@ static unsigned int zswap_max_pool_percent = 500;
 module_param_named(max_pool_percent,
 			zswap_max_pool_percent, uint, 0644);
 
-static unsigned int zswap_high_pool_percent = 40;
+static unsigned int zswap_high_pool_percent = 30;
 module_param_named(high_pool_percent,
 			zswap_high_pool_percent, uint, 0644);
 
-static unsigned int zswap_low_pool_percent = 38;
+static unsigned int zswap_low_pool_percent = 25;
 module_param_named(low_pool_percent,
 			zswap_low_pool_percent, uint, 0644);
 
@@ -1024,7 +1027,7 @@ static void hexdump(char *title, u8 *data, int len)
 {
 	int i;
 
-	printk("%s: length = %d @ %p\n", title, len, data);
+	printk("%s: length = %d \n", title, len);
 	for (i = 0; i < len; i++) {
 		printk("%02x ", data[i]);
 		if ((i & 0xf) == 0xf)
