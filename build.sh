@@ -14,7 +14,7 @@ KERNELNAME=SideCore
 repack()
 {
 	cd build/zip
-	FILENAME=SideCore-[UNIFIED]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
+	FILENAME=SideCore-${VERSION_NUMBER}-[UNIFIED]-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
 	zip -r $FILENAME .;
 	cd ../..
 	cp -r build/zip/*.zip PRODUCT/$FILENAME
