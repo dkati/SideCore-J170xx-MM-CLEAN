@@ -1,3 +1,10 @@
 <b><#selectbg_g>Changes since SideCore-v1.0</#></b>
 ---------------------------------------------------
-<*>Podia</*>
+<*>Rebased kernel</*>
+<*>Remove unstable governors</*>
+<*>IO updates</*>
+<*>ROW is the default IO sched</*>
+<*>Default IO RW is 1024kb</*>
+<*>GPU and CPU voltage control</*>
+<*>Audio boost via aroma configuration</*>
+<*>Unified zip.2 kernels-1 zip.stock and evo</*>
