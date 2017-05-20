@@ -94,7 +94,7 @@ stock()
 
 distro_clean()
 {
-	echo "Cleaning custom kernel files..."
+	echo "Distro cleaning"
 	rm -rf build/proprietary/kernel_stats/boot.img-kernel
 	rm -rf build/zip/boot.img
 	rm -rf build/zip/*.zip
