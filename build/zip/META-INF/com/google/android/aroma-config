@@ -5,7 +5,6 @@ ini_set("rom_device",           "Only for J710xx");
 ini_set("rom_date",             "xxxxxx");
 
 ini_set("force_colorspace", "rgba");
-ini_set("dp", "6");
 fontresload("0", "ttf/Roboto-Regular.ttf", "13");
 fontresload("1", "ttf/Roboto-Regular.ttf", "18");
 
