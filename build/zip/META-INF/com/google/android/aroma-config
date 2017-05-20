@@ -132,6 +132,8 @@ viewbox(
 	"@install"
 );
 
+ini_set("text_next", "Finish");
+ini_set("icon_next", "Finish");
 ###################################################################################################################
 #
 # INSTALLATION PROCESS
