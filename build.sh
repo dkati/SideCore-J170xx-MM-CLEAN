@@ -154,7 +154,7 @@ elif [ $prompt == "3" ]; then
 	evo; 
 	rerun;
 elif [ $prompt == "4" ]; then
-	OPTION_4;
+	repack;
 	rerun;
 elif [ $prompt == "5" ]; then
 	exit
