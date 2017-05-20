@@ -140,7 +140,8 @@ echo "1) Clean Workspace"
 echo "2) Build stock kernel"
 echo "3) Build evo"
 echo "4) Repack kernels"
-echo "5) Exit"
+echo "5) One-Click process"
+echo "6) Exit"
 echo ""
 read -p "Please select an option " prompt
 echo ""
@@ -157,6 +158,12 @@ elif [ $prompt == "4" ]; then
 	repack;
 	rerun;
 elif [ $prompt == "5" ]; then
+	deep_clean;
+	stock;
+	evo;
+	repack;
+	rerun;
+elif [ $prompt == "6" ]; then
 	exit
 fi
 
