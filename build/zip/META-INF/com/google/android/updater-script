@@ -62,7 +62,7 @@ file_getprop("/tmp/aroma-data/menu.prop","selected") == "1"
 then
 
 		package_extract_file("boot.img", "/tmp/boot.img");
-		ui_print("Flashing kernel image");
+		ui_print("Flashing EVO kernel image");
 	
 		set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
 		run_program("/tmp/flash_kernel.sh");
@@ -115,10 +115,11 @@ if
 file_getprop("/tmp/aroma-data/menu.prop","selected") == "2"
 then
 	
-	ui_print("Flashing stock kernel");
-	package_extract_file("/stock/stock/zip","/tmp/stock");
-	run_program("/sbin/busybox", "unzip", "/tmp/stock/stock.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/stock/stock.zip");
-	run_program("/sbin/busybox", "sh", "/tmp/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/stock/stock.zip");
+	package_extract_file("stock/boot.img", "/tmp/boot.img");
+	ui_print("Flashing stock kernel image");
+	
+	set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
+	run_program("/tmp/flash_kernel.sh");
 
 	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/stock/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/stock");
 	run_program("/sbin/busybox", "sh", "/tmp/splashboot/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/stock/bootlogo.zip");
