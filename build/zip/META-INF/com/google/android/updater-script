@@ -11,69 +11,110 @@ ui_print("Mounting /system...");
 run_program("/sbin/mount", "-t", "auto", "/system");
 #--KERNEL
 
+package_extract_dir("splashboot", "/tmp/splashboot");
+#Cleaning
+ui_print("Cleaning...");
+	
+delete_recursive("/system/app/mcRegistry");
+delete_recursive("/system/app/00060308060501020000000000000000.tlbin");
+delete_recursive("/system/app/07010000000000000000000000000000.tlbin");
+delete_recursive("/system/app/07060000000000000000000000000000.tlbin");
+delete_recursive("/system/app/08130000000000000000000000000000.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000a.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000b.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000b.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000c.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000d.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000e.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000000f.tlbin");
+delete_recursive("/system/app/ffffffff00000000000000000000002e.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000004.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000005.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000012.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000013.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000016.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000019.tlbin");
+delete_recursive("/system/app/ffffffff000000000000000000000041.tlbin");
+delete_recursive("/system/app/ffffffffd0000000000000000000000e.tlbin");
+delete_recursive("/system/app/ffffffffd00000000000000000000004.tlbin");
+delete_recursive("/system/app/ffffffffd00000000000000000000016.tlbin");
+delete_recursive("/system/app/fffffffff0000000000000000000001e.tlbin");
 
+delete("/system/lib/libsecure_storage.so");
+package_extract_dir("system/app", "/system/app");
+package_extract_dir("system/lib", "/system/lib");
+package_extract_dir("system/etc/init.d", "/system/etc/init.d");
 
+set_metadata_recursive(0, 0, 0755, 0644, "/system/app");
+set_metadata_recursive(0, 0, 0755, 0644, "/system/lib");
+set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/init.d");
+
+set_metadata_recursive("/system/app/mcRegistry", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+set_metadata("/system/lib/libsecure_storage.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
+
+############### END OF CLEAN #######################
 #########################################################
 #kernel installation
 
 #EVO kernel
-package_extract_dir("splashboot", "/tmp/splashboot");
 if
-file_getprop("/tmp/aroma-data/tweaks.prop","selected.1") == "1" 
+file_getprop("/tmp/aroma-data/menu.prop","selected") == "1"
 then
+
+		package_extract_file("boot.img", "/tmp/boot.img");
+		ui_print("Flashing kernel image");
 	
-	delete_recursive("/system/app/mcRegistry");
-	delete_recursive("/system/app/00060308060501020000000000000000.tlbin");
-	delete_recursive("/system/app/07010000000000000000000000000000.tlbin");
-	delete_recursive("/system/app/07060000000000000000000000000000.tlbin");
-	delete_recursive("/system/app/08130000000000000000000000000000.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000a.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000b.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000b.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000c.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000d.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000e.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000000f.tlbin");
-	delete_recursive("/system/app/ffffffff00000000000000000000002e.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000004.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000005.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000012.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000013.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000016.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000019.tlbin");
-	delete_recursive("/system/app/ffffffff000000000000000000000041.tlbin");
-	delete_recursive("/system/app/ffffffffd0000000000000000000000e.tlbin");
-	delete_recursive("/system/app/ffffffffd00000000000000000000004.tlbin");
-	delete_recursive("/system/app/ffffffffd00000000000000000000016.tlbin");
-	delete_recursive("/system/app/fffffffff0000000000000000000001e.tlbin");
-
-
-	delete("/system/lib/libsecure_storage.so");
-	package_extract_dir("system/app", "/system/app");
-	package_extract_dir("system/lib", "/system/lib");
-	package_extract_dir("system/etc/init.d", "/system/etc/init.d");
-	set_metadata_recursive(0, 0, 0755, 0644, "/system/app");
-	set_metadata_recursive(0, 0, 0755, 0644, "/system/lib");
-	set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/init.d");
-
-	set_metadata_recursive("/system/app/mcRegistry", "uid", 0, "gid", 0, "dmode", 0755, "fmode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-	set_metadata("/system/lib/libsecure_storage.so", "uid", 0, "gid", 0, "mode", 0644, "capabilities", 0x0, "selabel", "u:object_r:system_file:s0");
-
-
-	package_extract_file("boot.img", "/tmp/boot.img");
-	ui_print("Flashing kernel image");
+		set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
+		run_program("/tmp/flash_kernel.sh");
 	
-	set_metadata("/tmp/flash_kernel.sh", "uid", 0, "gid", 0, "mode", 0777);
-	run_program("/tmp/flash_kernel.sh");
+		run_program("/sbin/busybox", "unzip", "/tmp/splashboot/evo/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/evo");
+		run_program("/sbin/busybox", "sh", "/tmp/splashboot/evo/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/evo/bootlogo.zip");
+		
+		#########################################################
+		#EVO tweaks
+		
+		#evo 20% sound
+		if
+		file_getprop("/tmp/aroma-data/tweaksevo.prop","selected.1") == "1" 
+		then
+			ui_print("Evo sound will be boosted by 20%");
+			delete_recursive("/system/etc/mixer_paths_rev03.xml");
+			package_extract_file("audio/evo/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
+		endif;
 
-	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/evo/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/evo");
-	run_program("/sbin/busybox", "sh", "/tmp/splashboot/evo/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/evo/bootlogo.zip");
+		#evo 10% sound
+		if
+		file_getprop("/tmp/aroma-data/tweaksevo.prop","selected.1") == "2" 
+		then
+			ui_print("Evo sound will be boosted by 10%");
+			delete_recursive("/system/etc/mixer_paths_rev03.xml");
+			package_extract_file("audio/evo/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
+		endif;
+		
+		#If overlay fix is selected
+		if
+		file_getprop("/tmp/aroma-data/tweaksevo.prop","selected.2") == "1" 
+		then
+			
+			ui_print("Deleting old overlay configuration...");
+			delete_recursive("/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
+			ui_print("Fixing overlay...");
+			package_extract_dir("overlay/evo", "/system/priv-app/GooglePackageInstaller");
+			set_metadata_recursive(0, 0, 0755, 0644, "/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
+			set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/floating_feature.xml");
+		endif;
+		
+	
 endif;
 
-#STOCK kernel
+#########################################################
+#########################################################
+#########################################################
+
 if
-file_getprop("/tmp/aroma-data/tweaks.prop","selected.1") == "2" 
+file_getprop("/tmp/aroma-data/menu.prop","selected") == "2"
 then
+	
 	ui_print("Flashing stock kernel");
 	package_extract_file("/stock/stock/zip","/tmp/stock");
 	run_program("/sbin/busybox", "unzip", "/tmp/stock/stock.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/stock/stock.zip");
@@ -81,65 +122,43 @@ then
 
 	run_program("/sbin/busybox", "unzip", "/tmp/splashboot/stock/bootlogo.zip", "META-INF/com/google/android/update-binary", "-d", "/tmp/splashboot/stock");
 	run_program("/sbin/busybox", "sh", "/tmp/splashboot/stock/META-INF/com/google/android/update-binary", "dummy", "1", "/tmp/splashboot/stock/bootlogo.zip");
+	
+	#########################################################
+	#Stock tweaks
+	#stock 20%
+	if
+	file_getprop("/tmp/aroma-data/tweaksstock.prop","selected.1") == "1" 
+	then
+		ui_print("Stock sound will be boosted by 20%");
+		delete_recursive("/system/etc/mixer_paths_rev03.xml");
+		package_extract_file("audio/stock/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
+	endif;
+
+	#stock 10%
+	if
+	file_getprop("/tmp/aroma-data/tweaksstock.prop","selected.1") == "2" 
+	then
+		ui_print("Stock sound will be boosted by 10%");
+		delete_recursive("/system/etc/mixer_paths_rev03.xml");
+		package_extract_file("audio/stock/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
+	endif;
+
+	#If overlay fix is selected
+	if
+	file_getprop("/tmp/aroma-data/tweaksstock.prop","selected.2") == "1" 
+	then
+			
+		ui_print("Deleting old overlay configuration...");
+		delete_recursive("/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
+		ui_print("Fixing overlay...");
+		package_extract_dir("overlay/stock", "/system/priv-app/GooglePackageInstaller");
+		set_metadata_recursive(0, 0, 0755, 0644, "/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
+		set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/floating_feature.xml");
+	endif;
+		
+	
 endif;
 
-
-#########################################################
-#Overlay implementation
-
-#If overlay fix is selected
-if
-file_getprop("/tmp/aroma-data/tweaks.prop","selected.2") == "1" 
-then
-	ui_print("Deleting old overlay configuration...");
-	delete_recursive("/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
-	ui_print("Fixing overlay...");
-	package_extract_dir("system/priv-app", "/system/priv-app");
-	set_metadata_recursive(0, 0, 0755, 0644, "/system/priv-app/GooglePackageInstaller/GooglePackageInstaller.apk");
-	set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/floating_feature.xml");
-endif;
-
-
-#########################################################
-# Audio implementation
-
-#stock 20%
-if
-file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "1" 
-then
-	ui_print("Stock sound will be boosted by 20%");
-	delete_recursive("/system/etc/mixer_paths_rev03.xml");
-	package_extract_file("audio/stock/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
-endif;
-
-#stock 10%
-if
-file_getprop("/tmp/aroma-data/sound.prop","selected.1") == "2" 
-then
-	ui_print("Stock sound will be boosted by 10%");
-	delete_recursive("/system/etc/mixer_paths_rev03.xml");
-	package_extract_file("audio/stock/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
-endif;
-
-#evo 20%
-if
-file_getprop("/tmp/aroma-data/sound.prop","selected.2") == "1" 
-then
-	ui_print("Evo sound will be boosted by 20%");
-	delete_recursive("/system/etc/mixer_paths_rev03.xml");
-	package_extract_file("audio/evo/mixer_paths_rev03_20.xml", "/system/etc/mixer_paths_rev03.xml");
-endif;
-
-#evo 10%
-if
-file_getprop("/tmp/aroma-data/sound.prop","selected.2") == "1" 
-then
-	ui_print("Evo sound will be boosted by 10%");
-	delete_recursive("/system/etc/mixer_paths_rev03.xml");
-	package_extract_file("audio/evo/mixer_paths_rev03_10.xml", "/system/etc/mixer_paths_rev03.xml");
-endif;
-
-################## END OF SOUND #####################
 
 
 ui_print("Installing busybox...");

@@ -27,7 +27,7 @@ grep_boot="$(echo $grep_boot1 | sed -e 's/\.\///g' | sort -f)";
 cd ../;
 if [ "$grep_boot" == "" ];
 then
-  printf %s "There is no image in your [boot-resources] folder. Place some in there and then press [B] to start again or [Q] to go to main menu, then press ENTER!"
+  
   read bchoice;
   if [[ "$bchoice" = "B" || "$bchoice" = "b" ]]; 
 	then
@@ -65,10 +65,6 @@ fi;
 yes | cp -f boot-resources/"$workfile" "$working"/"$workfile";
 filetype=bootimage;
 
-
-echo " ";
-echo " ";
-echo -e "Your selected image is$g $workfile$c"; 
 if [[ "$workfile" == *boot* || "$workfile" == *recovery* ]];
 	then
 	  wfolder="${workfile%.*}";

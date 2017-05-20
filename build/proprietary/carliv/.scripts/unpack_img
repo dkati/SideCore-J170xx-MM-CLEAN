@@ -15,17 +15,7 @@ cd "$PWD";
 unpackbootimg=$bin/unpackbootimg;
 ###########################################################
 clear;
-echo -e "
-****************************************************
-*                                                  *
-*     $cy Carliv Image Kitchen for Android$c v1.3       *
-*  boot+recovery images copyright-2016$cy carliv@xda$c  *
-*  including support for MTK powered phones images *
-*                $g LINUX x64 version$c                *
-*             The unpacking images script          *
-*                                                  *
-****************************************************
-";
+
 ###########################################################
 if [ ! "$1" ]; 
 	then
@@ -43,9 +33,6 @@ fi;
 file=$(basename "$1");
 origfile=$(basename "$2");
 filename="${origfile%.*}";
-echo -e "Your image is$y $origfile$c";
-###########################################################
-echo " ";
 wimage="$file";
 ###########################################################
 if [[ "$wimage" = "boot.img" ]];
@@ -91,9 +78,7 @@ if [[ "$wimage" = "recovery.img" ]];
 	fi;
 fi;
 ###########################################################
-echo " ";
-echo -e "Create the$y $filename$c folder....";
-echo " ";
+
 if [ -d "$filename" ];
 	then
 	rm -rf "$filename";
@@ -107,8 +92,7 @@ if [[ -z "$wimage" ]];
 	abort;
 	exit 1;
 fi;
-echo -e "Unpacking the$y $file$c to$y $filename$c folder....";
-echo " ";
+
 if [ ! "$3" ];
 	then
 	$unpackbootimg -i "$wimage" -o "$filename";
@@ -150,16 +134,9 @@ fi;
 cd "$filename";
 comprfile=$(find . -name "*-ramdisk.*");
 compress="${comprfile##*.}";
-echo -e "Compression used:$y $compress ";
 filecomp="$wimage"-ramdisk-compress;
-if [ ! -f "$filecomp" ]
-	then 
-	echo "$compress" > "$filecomp" ;
-fi;
 mkdir -p ramdisk;
-###########################################################
-echo " ";
-echo -e "Unpacking the$y ramdisk$c....";
+
 cd ramdisk;
 ###########################################################
 if [ "$compress" == "gz" ];
@@ -246,7 +223,4 @@ if [ "$compress" == "unknown" ];
 	  abort;
 	  exit 1;
 fi;
-echo " ";
-###########################################################
-echo -e "Done! Your image is unpacked in$y $filename$c folder.";
-echo " ";
+

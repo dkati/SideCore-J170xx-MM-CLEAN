@@ -38,11 +38,9 @@ OPTION_2()
 	cd ../../..
 	cp -r build/proprietary/carliv/output/boot.img build/zip/boot.img
 	cd build/zip
-	FILENAME=SideCore-[EVO]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-STOCK-MM"`.zip
+	FILENAME=SideCore-[UNIFIED]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
 	zip -r $FILENAME .;
 	cd ../..
-	
-	FILENAME=SideCore-[UNIFIED]-${VERSION_NUMBER}-`date +"[%H-%M]-[%d-%m]-J710xx-MM"`.zip
 	cp -r build/zip/*.zip PRODUCT/$FILENAME
 	
 	
