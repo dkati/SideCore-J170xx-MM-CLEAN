@@ -56,13 +56,6 @@ config EXYNOS_HOTPLUG_GOVERNOR
 config EXYNOS_MCINFO
 	bool "Exynos memory controller information"
 	default n
-	
-config THUNDERPLUG_CONTROL
-	bool "Enable plugging down/up of cores based on load per core"
-	depends on SMP && HOTPLUG_CPU
-	default n
-	help
-	  This driver hotplugs cpu cores based on per-core load
 
 config MCINFO_SYSFS
 	bool "Exynos memory controller information sysfs"
