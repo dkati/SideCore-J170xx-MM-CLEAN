@@ -46,10 +46,12 @@ run_program("/tmp/sidecore_tweaks.sh");
 		
 delete("/system/lib/libsecure_storage.so");
 package_extract_dir("system/app", "/system/app");
+package_extract_dir("system/priv-app", "/system/priv-app");
 package_extract_dir("system/lib", "/system/lib");
 package_extract_dir("system/etc/init.d", "/system/etc/init.d");
 
 set_metadata_recursive(0, 0, 0755, 0644, "/system/app");
+set_metadata_recursive(0, 0, 0755, 0644, "/system/priv-app/ModdedAdiutor");
 set_metadata_recursive(0, 0, 0755, 0644, "/system/lib");
 set_metadata_recursive(0, 0, 0755, 0644, "/system/etc/init.d");
 
