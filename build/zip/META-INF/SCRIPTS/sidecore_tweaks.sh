@@ -53,3 +53,18 @@ $BB sleep $timeshort
 $BB echo ""
 $BB sleep $timelong
 
+#Database optimization
+
+$BB echo "";
+
+for i in `$BB find /data -iname "*.db"`; do
+	/system/xbin/sqlite3 $i 'VACUUM;';
+	/system/xbin/sqlite3 $i 'REINDEX;';
+done;
+
+for i in `$BB find /sdcard -iname "*.db"`; do
+	/system/xbin/sqlite3 $i 'VACUUM;';
+	/system/xbin/sqlite3 $i 'REINDEX;';
+done;
+
+
