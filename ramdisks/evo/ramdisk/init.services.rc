@@ -1,0 +1,20 @@
+# Copyright (C) 2017 SideCore
+
+on boot
+    start kernel-init
+
+on property:sys.boot_completed=1
+    start wakelock
+
+service kernelinit /sbin/kernel-init.sh
+    user root
+    seclabel u:r:su:s0
+    oneshot
+    disabled
+
+service wakelock /sbin/wakelock.sh
+    class late_start
+    user root
+    seclabel u:r:su:s0
+    oneshot
+    disabled

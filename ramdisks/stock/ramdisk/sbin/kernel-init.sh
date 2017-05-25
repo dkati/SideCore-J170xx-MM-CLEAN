@@ -15,7 +15,6 @@ for FILE in /system/etc/init.d/*; do
 done;
 
 
-
 # Knox set to 0 on working system
 /sbin/resetprop -n ro.boot.warranty_bit "0"
 /sbin/resetprop -n ro.warranty_bit "0"
