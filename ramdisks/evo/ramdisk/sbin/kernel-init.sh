@@ -14,11 +14,27 @@ for FILE in /system/etc/init.d/*; do
    sh $FILE >/dev/null
 done;
 
-mount -t rootfs -o remount,ro rootfs
-mount -o remount,rw -t auto /data
-mount -o remount,ro -t auto /system
+# Google play services wakelock fix
+sleep 1
+su -c "pm enable com.google.android.gms/.update.SystemUpdateActivity"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$ActiveReceiver"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$Receiver"
+su -c "pm enable com.google.android.gms/.update.SystemUpdateService$SecretCodeReceiver"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateActivity"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdatePanoActivity"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$Receiver"
+su -c "pm enable com.google.android.gsf/.update.SystemUpdateService$SecretCodeReceiver"
+
 
 # Knox set to 0 on working system
 /sbin/resetprop -n ro.boot.warranty_bit "0"
 /sbin/resetprop -n ro.warranty_bit "0"
+
+
+mount -t rootfs -o remount,ro rootfs
+mount -o remount,rw -t auto /data
+mount -o remount,ro -t auto /system
+
 
