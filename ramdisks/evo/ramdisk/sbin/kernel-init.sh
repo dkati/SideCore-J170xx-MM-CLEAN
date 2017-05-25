@@ -17,3 +17,8 @@ done;
 mount -t rootfs -o remount,ro rootfs
 mount -o remount,rw -t auto /data
 mount -o remount,ro -t auto /system
+
+# Knox set to 0 on working system
+/sbin/resetprop -n ro.boot.warranty_bit "0"
+/sbin/resetprop -n ro.warranty_bit "0"
+
