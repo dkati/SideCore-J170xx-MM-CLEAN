@@ -1,11 +1,32 @@
 <b><#selectbg_g>Changes since SideCore-v1.0</#></b>
 ---------------------------------------------------
 <*>Rebased kernel</*>
+<*>Aroma installer.Configure your stuff</*>
+<*>Support all stock roms</*>
+<*>Support all evo based roms</*>
 <*>Remove unstable governors</*>
 <*>IO updates</*>
 <*>ROW is the default IO sched</*>
 <*>Default IO RW is 1024kb</*>
-<*>GPU and CPU voltage control</*>
 <*>Audio boost via aroma configuration</*>
 <*>Unified zip.2 kernels-1 zip.stock and evo</*>
 <*>Default TCP congestion is CUBIC</*>
+<*>GPU voltages</*>
+<*>Wakelocks (Disabled by default)</*>
+<*>CPU Voltages</*>
+<*>Dynamic fsync fix</*>
+<*>Enable samsung stock hidden hotplug</*>
+<*>SideCore app to tune the kernel
+	<*>Based on morogokus one</*>
+</*>
+<*>Optimized DB on flashing</*>
+<*>Kill google apps wakelocks on flashing</*>
+<*>Fake knox 0x0 on runtime</*>
+<*>init.d fixed</*>
+<*>Successfully remove all samsung's protection shit </*>
+<*>Hack the dex of the rom</*>
+<*>Hack internet speed</*>
+<*>Enabled state notifier for better sleep</*>
+<*>Updated PowerSuspend driver</*>
+<*>Enable zswap and compress it with lz4</*>
+<*>General clean and tide up</*>
