@@ -2,7 +2,7 @@ ini_set("rom_name",             "SideCore kernel");
 ini_set("rom_version",          "2.0");
 ini_set("rom_author",           "side & zombie99 @xda");
 ini_set("rom_device",           "Only for J710xx");
-ini_set("rom_date",             "666");
+ini_set("rom_date",             "xxxxxx");
 
 ini_set("force_colorspace", "rgba");
 fontresload("0", "ttf/Roboto-Regular.ttf", "13");
