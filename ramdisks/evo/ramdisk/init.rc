@@ -1695,7 +1695,8 @@ on property:sys.boot_completed=1
     #External IO sched
     write /sys/block/mmcblk1/queue/scheduler row
     #Enable Samsung stock hotplug
-    write sys/power/cpuhotplug/enabled 1
+    chmod 0755 /sys/power/cpuhotplug/enabled
+    write /sys/power/cpuhotplug/enabled 1
     
     
     chown system system /sys/class/net/wlan0/queues/rx-0/rps_cpus
