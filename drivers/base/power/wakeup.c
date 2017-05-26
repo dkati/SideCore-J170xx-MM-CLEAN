@@ -25,31 +25,31 @@
 #include <linux/moduleparam.h>
 
 
-static bool enable_sensorhub_wl = true;
+static bool enable_sensorhub_wl = false;
 module_param(enable_sensorhub_wl, bool, 0644);
 
-static bool enable_ssp_wl = true;
+static bool enable_ssp_wl = false;
 module_param(enable_ssp_wl, bool, 0644);
 
-static bool enable_mmc0_detect_wl = true;
+static bool enable_mmc0_detect_wl = false;
 module_param(enable_mmc0_detect_wl, bool, 0644);
 
-static bool enable_wlan_rx_wake_wl = true;
+static bool enable_wlan_rx_wake_wl = false;
 module_param(enable_wlan_rx_wake_wl, bool, 0644);
 
-static bool enable_wlan_ctrl_wake_wl = true;
+static bool enable_wlan_ctrl_wake_wl = false;
 module_param(enable_wlan_ctrl_wake_wl, bool, 0644);
 
-static bool enable_wlan_wake_wl = true;
+static bool enable_wlan_wake_wl = false;
 module_param(enable_wlan_wake_wl, bool, 0644);
 
-static bool enable_wlan_wd_wake_wl = true;
+static bool enable_wlan_wd_wake_wl = false;
 module_param(enable_wlan_wd_wake_wl, bool, 0644);
 
-static bool enable_bcmdhd4359_wl = true;
+static bool enable_bcmdhd4359_wl = false;
 module_param(enable_bcmdhd4359_wl, bool, 0644);
 
-static bool enable_bluedroid_timer_wl = true;
+static bool enable_bluedroid_timer_wl = false;
 module_param(enable_bluedroid_timer_wl, bool, 0644);
 
 /*
