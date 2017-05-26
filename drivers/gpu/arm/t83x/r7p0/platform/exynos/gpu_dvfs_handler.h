@@ -55,6 +55,7 @@ int gpu_dvfs_get_level(int clock);
 int gpu_dvfs_get_max_freq(void);
 int gpu_dvfs_get_min_freq(void);
 int gpu_dvfs_get_level_clock(int clock);
+int gpu_dvfs_get_stock_level(int clock);
 int gpu_dvfs_get_voltage(int clock);
 int gpu_dvfs_get_cur_asv_abb(void);
 int gpu_dvfs_get_clock(int level);
