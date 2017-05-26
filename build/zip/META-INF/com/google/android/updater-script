@@ -19,7 +19,7 @@ delete_recursive("/data/.mtweaks");
 delete_recursive("/data/data/com.moro.mtweaks");
 delete_recursive("/data/data/com.moro.mtweaks-1");
 delete_recursive("/data/app/com.moro.mtweaks");
-delete_recursive("/data/app/com.moro.mtweaks");
+delete_recursive("/data/app/com.moro.mtweaks-1");
 
 ui_print("Fixing lockscreen shit...");
 delete_recursive("/system/app/mcRegistry");
