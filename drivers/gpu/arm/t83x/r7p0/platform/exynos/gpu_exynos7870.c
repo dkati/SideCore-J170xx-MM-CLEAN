@@ -83,7 +83,6 @@ static gpu_dvfs_info gpu_dvfs_table_default[] = {
 	{545,  900000, 0, 78,  85, 1, 0, 546000, 334000,  902000, CPU_MAX},
 	{450,  900000, 0, 78,  85, 1, 0, 451000, 200000,       0, CPU_MAX},
 	{343,  900000, 0, 78,  85, 1, 0, 275000, 134000,       0, CPU_MAX},
-	{260,  900000, 0, 78,  85, 1, 0, 275000, 134000,       0, CPU_MAX},
 };
 
 static int mif_min_table[] = {
@@ -97,8 +96,8 @@ static int mif_min_table[] = {
 static gpu_attribute gpu_config_attributes[] = {
 	{GPU_MAX_CLOCK, 1001},
 	{GPU_MAX_CLOCK_LIMIT, 1001},
-	{GPU_MIN_CLOCK, 260},
-	{GPU_MIN_CLOCK_LIMIT, 260},
+	{GPU_MIN_CLOCK, 343},
+	{GPU_MIN_CLOCK_LIMIT, 343},
 	{GPU_DVFS_START_CLOCK, 343},
 	{GPU_DVFS_BL_CONFIG_CLOCK, 343},
 	{GPU_GOVERNOR_TYPE, G3D_DVFS_GOVERNOR_INTERACTIVE},
@@ -128,7 +127,7 @@ static gpu_attribute gpu_config_attributes[] = {
 	{GPU_TEMP_THROTTLING5, 343},
 	{GPU_TEMP_THROTTLING6, 450},
 	{GPU_TEMP_THROTTLING7, 343},
-	{GPU_TEMP_THROTTLING8, 260},
+	{GPU_TEMP_THROTTLING8, 343},
 	{GPU_TEMP_TRIPPING, 343},
 	{GPU_POWER_COEFF, 625}, /* all core on param */
 	{GPU_DVFS_TIME_INTERVAL, 5},
